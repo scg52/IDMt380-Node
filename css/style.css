@@ -1,0 +1,90 @@
+/*display view*/
+.user-view{
+    display: none;
+}
+
+/*user view*/
+/*[data-mobile-users="true"] .display-view{
+    display: none;
+}*/
+
+[data-mobile-users="true"] .user-view{
+    display: block;
+}
+
+.container{
+}
+
+.fish{
+    position: absolute;
+    left: 25vw;
+    top: 25vh;
+	width: 100px;
+	height: 100px;
+	text-align: center;
+    animation-name: circle;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.fish:active{
+    animation: none;
+}
+
+.Flower{
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+
+.A-Note{
+	background-color: pink;
+}
+.B-Note{
+    background-color: red;
+}
+.C-Note{
+    background-color: orange;
+}
+.D-Note{
+    background-color: yellow;
+}
+.E-Note{
+    background-color: green;
+}
+.F-Note{
+    background-color: blue;
+}
+.G-Note{
+    background-color: purple;
+}
+
+.droppable{
+    width: 50px;
+    height: 50px;
+    background-color: grey;
+    color: white;
+    position: absolute;
+    left: 90vw;
+    top: 80vh;
+}
+
+.display{
+    display: none !important;
+    animation-name: none;
+}
+
+/*--------------------------------------------------------Media Queries--------------------------------------------------------*/
+
+@media (min-width: 900px) {
+
+}
+
+/*-------------------------------------------------------------Keyframes---------------------------------------------------------*/
+
+
+@keyframes circle{
+    from { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(150px) rotate(0deg); }
+}
