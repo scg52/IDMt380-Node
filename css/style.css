@@ -26,6 +26,7 @@
     animation-duration: 5s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
+    z-index: -1;
 }
 
 .fish:active{
@@ -33,9 +34,11 @@
 }
 
 .Flower{
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     text-align: center;
+    border-radius: 50%;
+    z-index: 3;
 }
 
 .A-Note{
@@ -60,14 +63,15 @@
     background-color: purple;
 }
 
-.droppable{
-    width: 50px;
-    height: 50px;
+.trash{
+    width: 100px;
+    height: 100px;
     background-color: grey;
     color: white;
     position: absolute;
-    left: 90vw;
-    top: 80vh;
+    left: 80vw;
+    top: 70vh;
+    text-align: center; 
 }
 
 .display{
@@ -84,7 +88,12 @@
 /*-------------------------------------------------------------Keyframes---------------------------------------------------------*/
 
 
-@keyframes circle{
+/*@keyframes circle{
     from { transform: rotate(0deg) translateX(150px) rotate(0deg); }
     to   { transform: rotate(360deg) translateX(150px) rotate(0deg); }
-}
+}*/
+
+@keyframes circle{
+    from { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+} /*change absolute position if that doesnt work animate in js*/

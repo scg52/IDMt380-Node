@@ -52,6 +52,7 @@ $( "#GenFish" ).click(function() {
     if($(userId).hasClass('display')){
         console.log('See Fish');
         $(userId).removeClass('display');
+        detectcollision();
     }
     else{
         console.log('Hide Fish');
@@ -90,109 +91,46 @@ $( "#GenFlower" ).click(function() {
     generateFlower(note, user);
 });
 
+//Drag and Drop code-----------------------------------------------------------------------------------------------------------
 
-function flower(notes, user) {
-    switch (notes) { 
-      case 'A-Note': 
-        user.generateFlower('A-Note', user);
-        console.log('A Flower Created');
-        break;
-      case 'B-Note': 
-        user.generateFlower('B-Note', user);
-        console.log('B Flower Created');
-        break;
-      case 'C-Note': 
-        user.generateFlower('C-Note', user);
-        console.log('C Flower Created');
-        break;      
-      case 'D-Note': 
-        user.generateFlower('D-Note', user);
-        console.log('D Flower Created');
-        break;
-      case 'E-Note': 
-        user.generateFlower('E-Note', user);
-        console.log('E Flower Created');
-        break;
-      case 'F-Note': 
-        user.generateFlower('F-Note', user);
-        console.log('F Flower Created');
-        break;      
-      case 'G-Note': 
-        user.generateFlower('G-Note', user);
-        console.log('G Flower Created');
-        break;
-      default:
-        user.generateFlower('A-Note', user);
-        console.log('A Flower Created');
-    }
-    
-}// generate flower
+$( ".Fcontainer" ).on( "mousedown", "div", function( event ) {
+    event.preventDefault();
+    console.log( 'Flower Clicked' );
+    $('.Flower').draggable();
+});
 
-//user.generateFlower('A-Note', user);
+$('.trash').droppable({
+  //only accept elements with .flower class
+  accept: '.Flower',
+  drop: function(event, ui){
+    //remove the item that was dragged and dropped
+    $(ui.draggable).remove();
+  }
+});
 
-//---------------------Desperate attempt to hardcode the drag and drop that I found online---------------------------------------
-            fish.on('mousedown', function(e) {
-                var elem = $(this),
-                    start = {
-                        top: parseFloat(elem.css('marginTop').replace(/px/, '')),
-                        left: parseFloat(elem.css('marginLeft').replace(/px/, ''))
-                    },
-                    mouse = {
-                        top: e.clientY,
-                        left: e.clientX
-                    };
 
-                $(document).on('mousemove', function(e) {
-                    var end = {
-                        Y: start.top + e.clientY - mouse.top,
-                        X: start.left + e.clientX - mouse.left
-                    };
-                    elem.css({
-                        marginTop: end.Y + 'px',
-                        marginLeft: end.X + 'px'
-                    });
+//overlap code-----------------------------------------------------------------------------------------------------------------
 
-                  });
 
-                }); //fish on mousedown
 
-                Flower.on('mousedown', function(e) {
-                var elem = $(this),
-                    start = {
-                        top: parseFloat(elem.css('marginTop').replace(/px/, '')),
-                        left: parseFloat(elem.css('marginLeft').replace(/px/, ''))
-                    },
-                    mouse = {
-                        top: e.clientY,
-                        left: e.clientX
-                    };
+  function detectcollision(){
 
-                $(document).on('mousemove', function(e) {
-                    var end = {
-                        Y: start.top + e.clientY - mouse.top,
-                        X: start.left + e.clientX - mouse.left
-                    };
-                    elem.css({
-                        marginTop: end.Y + 'px',
-                        marginLeft: end.X + 'px'
-                    });
+    var collides = Flower.overlaps(fish);
 
-                    /*** :plugin specific code ***/
+    if(collides.hits.length){
+        audio.play(); 
+        console.log('sound'); 
+    }else{
+      console.log('no sound');
+    } //   http://theremin.music.uiowa.edu/MISpiano.html
 
-                    var collides = Flower.overlaps(fish);
-                    if(collides.hits.length){
-                         audio.play(); 
-                         console.log('sound'); 
-                    }else{
-                       console.log('no sound'); 
-                    } //   http://theremin.music.uiowa.edu/MISpiano.html
-                    /*** plugin specific code: ***/
+   
 
-                }).on('mouseup', function() {
-                    $(this).off('mousemove');
-                });
+  }
 
-                e.preventDefault();
-            });//--------------------------------------------------------------------------------------------------------
+  setInterval(function(){
+      console.log('log');
+     detectcollision();
+    }, 10);
 
 }//onload

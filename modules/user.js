@@ -48,7 +48,7 @@ window.mobilecheck = function() {
 
 function generateFish(user) {
   if (user.mobile){
-    $('.display-view').append('<div class="fish drag" id="id-' + user.id + '" style="background: ' + user.color + '"> <p> This is user ' + user.id + '\'s fish </p> </div>');
+    $('.display-view').append('<div class="fish display drag" id="id-' + user.id + '" style="background: ' + user.color + '"> <p> This is user ' + user.id + '\'s fish </p> </div>');
   }
 }
 
@@ -64,7 +64,7 @@ function fishOff(user) {
 
 function generateFlower (note, user) { 
     
-  $('.container').append('<div class="Flower ' + note + ' drag id-' + user.id + '"> <p> ' + note + ' Flower <br>' + user.id + '</p> </div>');
+  $('.Fcontainer').append('<div class="Flower ' + note + ' drag id-' + user.id + '"> <p> ' + note + ' Flower <br>' + user.id + '</p> </div>');
 }
 
 function addUser(user) {
