@@ -41,8 +41,11 @@ window.onload = function () {
 
 var fish = $('.fish');  // box
 var Flower = $('.Flower'); //drop
-var audio = document.createElement('audio');
+    var trash = $('.trash');
+var audio = window.audio = document.createElement('audio');
+audio.className = 'E-Note';
 audio.src = 'sounds/Zombie Long Death-SoundBible.com-554299929.mp3';
+
 var fishButtonEl = $('#GenFish');
 var flowerButtonEl = $('#GenFlower');
 var userId = '#id-' + user.id;
@@ -95,7 +98,7 @@ $( "#GenFlower" ).click(function() {
 
 $( ".Fcontainer" ).on( "mousedown", "div", function( event ) {
     event.preventDefault();
-    console.log( 'Flower Clicked' );
+    //console.log( 'Flower Clicked' );
     $('.Flower').draggable();
 });
 
@@ -112,25 +115,26 @@ $('.trash').droppable({
 //overlap code-----------------------------------------------------------------------------------------------------------------
 
 
-
   function detectcollision(){
-
-    var collides = Flower.overlaps(fish);
-
+    var collides = $('.Flower').overlaps($('.fish'));
+      //console.log(collides);
     if(collides.hits.length){
-        audio.play(); 
-        console.log('sound'); 
+
+        var note = $(collides.targets[0]).data('note');
+
+        window.audio.play();
+        //window.audio.play();
     }else{
-      console.log('no sound');
+      //console.log('no sound');
     } //   http://theremin.music.uiowa.edu/MISpiano.html
 
-   
+
 
   }
 
   setInterval(function(){
-      console.log('log');
      detectcollision();
-    }, 10);
+    }, 1000);
 
-}//onload
+
+ }//onload
