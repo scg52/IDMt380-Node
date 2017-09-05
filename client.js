@@ -281,11 +281,10 @@ $('.trash').droppable({
     var collides = $('.Flower').overlaps($('.fish'));
     if(collides.hits.length){
         var aId = '#a' + $(collides.targets).attr('id');
-        var audio = $(aId);
+        var audio = $(aId)[0];
         console.log(audio);
-        console.log(aId);
-        //window.audio.pause();
-        window.audio.play();
+        audio.play();
+
     }
   } //detect collision
 
