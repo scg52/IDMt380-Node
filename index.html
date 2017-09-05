@@ -2,31 +2,56 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Chord Pond Low Fi</title>
+    <title>Chord Pond</title>
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body data-mobile-users="false">
-
+    <div class="landscape">
+        <p>Please Use Landscape</p>
+    </div>
     <div class="container">
-    
       <div class="display-view">
       </div>
       <div class="user-view">
-        <button id="GenFish">Fish</button>
-        <button id="GenFlower" id="draggable">Flower</button>
+        <div id="GenFish">
+          <p id="fishMenu">
+            Fish
+          </p>
+          <ul id="fishList" class="display">
+            <li id="circle-button">Circle</li>
+            <li id="zigzag-button">Zigzag</li>
+            <li id="fig8-button">Line</li>
+          </ul>
+        </div>
+        <div id="GenFlower" id="draggable">
+          <p id="flowerMenu">
+            Flower
+          </p>
+          <ul id="flowerList" class="display">
+            <li id="genA">A-Note</li>
+            <li id="genB">B-Note</li>
+            <li id="genC">C-Note</li>
+            <li id="genD">D-Note</li>
+            <li id="genE">E-Note</li>
+            <li id="genF">F-Note</li>
+            <li id="genG">G-Note</li>
+          </ul>
+        </div>
         <div class="trash">Trash</div>
       </div>
       <div class="Fcontainer"></div>
 
     </div>
 
+    <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="js/touch-punch.js"></script>
+    <script src="js/touch-punch.js"></script> <!-- touch screen functionality for jqeury ui -->
     <script src="modules/user.js"></script>
+    <script src="modules/flower.js"></script>
     <script src="js/jquery.overlaps.js"></script>
     <script src="client.js"></script>
 

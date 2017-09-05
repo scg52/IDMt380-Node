@@ -1,4 +1,3 @@
-var WebSocketServer = require('ws').Server;
 var http = require('http');
 var express = require('express');
 
@@ -14,69 +13,69 @@ server.listen(port);
 
 console.log('http server listening on %d', port);
 
-var wss = new WebSocketServer({server: server});
-console.log('websocket server was created');
-console.log('WebSockerServer is Up');
+var io = require('socket.io')(server);
+console.log('socket.io server was created');
+console.log('Server is Up');
 
 var connections = [];
 var users = [];
+var flowers = [];
 
-wss.on('connection', function(ws) {
-  connections.push(ws);
+io.sockets.on('connection', function(socket) {
+  connections.push(socket);
   console.log('user connected');
 
-  ws.on('message', function(m) {
+  socket.on('loadAll', function(user){
+    socket.emit('loadAll', users, flowers);
+    users.push(user);
+    socket.emit('register', user);
+    socket.broadcast.emit('register', user)
+  });
 
-    var msg = JSON.parse(m);
-    console.log(msg);
+  socket.on('genFlower', function(flower) {
+    flowers.push(flower);
+    socket.broadcast.emit('genFlower', flower);
+  });
 
-    if(msg.type == 'register'){
-        users.push(msg.user);
-        console.log(users);
-    }else if (msg.type == 'loadAll'){
-      msg.users = users;
+  socket.on('destroyFlower', function(fId, user) {
+    flowers.splice(flowers.indexOf(fid), 1);
+    socket.broadcast.emit('destroyFlower', fId, user);
+  });
+
+  socket.on('fishAnim', function(user, anim) {
+    if(anim == 'circle'){
+      socket.broadcast.emit('circleAnim', user);
+    }else if(anim == 'zigzag'){
+      socket.broadcast.emit('zigzagAnim', user);
+    }else{
+      socket.broadcast.emit('fig8Anim', user);
     }
+  });
 
-    if (msg.sendToAll){
-        //send to all connections
-        users.forEach(function(ws, index) {
-            if(users.id == msg.user.id && user != msg.user){
-              user[index] = msg.user;
-            }
-          });
+  socket.on('flowerMove', function(fId, x, y) {
+    socket.broadcast.emit('flowerMove', fId, x, y);
+  });
 
-          connections.forEach(function(ws, index) {
-            ws.send(JSON.stringify(msg));
-            console.log('msg sent to client');
-          });
-    }
-    else{
-        //send to sender only
-        ws.send(JSON.stringify(msg));
-    }
+  socket.on('fishMove', function(id, x, y) {
+    socket.broadcast.emit('fishMove', id, x, y);
+  });
 
-  }); //ws on message close
+  //       users.forEach(function(ws, index) {
+  //           if(users.id == msg.user.id && user != msg.user){
+  //             user[index] = msg.user;
+  //           }
+  //       });
 
-  ws.on('close', function() {
+
+  socket.on('disconnect', function() {
     
     console.log('user disconnected');
 
-    var msg = {
-      type: 'logoff',
-      user: users[connections.indexOf(ws)]
-    };
-
-    //search the connections array for the current socket that is closign, 
-    //use that index to find the user in the users array, 
-    //this index number should be the same because they are both added in the same order
+    socket.broadcast.emit('logOff', users[connections.indexOf(socket)]);
     
-    users.splice(connections.indexOf(ws), 1);
-    connections.splice(connections.indexOf(ws), 1);
+    users.splice(connections.indexOf(socket), 1);
+    connections.splice(connections.indexOf(socket), 1);
 
-    connections.forEach(function(connection, index) {
-      connection.send(JSON.stringify(msg));
-      console.log('msg sent to client');
-    });
   });
 
 });

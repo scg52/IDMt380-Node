@@ -4,36 +4,13 @@ function User() {
   this.id = Math.random().toString(36).substr(2, 9);
   this.color = "#"+Math.floor(Math.random()*16777215).toString(16);
   this.mobile = mobilecheck();
+  this.flowerCount = 0;
 
   $('.id').html(this.id);
 
   if (this.mobile){
     $('body').attr('data-mobile-users', true);
   }
-}
-
-User.prototype.register = function(data) {
-
-    generateFish(data.user);
-}
-
-User.prototype.logoff = function(data) {
-
-    var selectorId = '#id-' + data.user.id;
-    var selectorClass = '.id-' + data.user.id;
-    $(selectorId).remove();
-    $(selectorClass).remove();
-    
-}
-
-User.prototype.loadAll = function(data) {
-    console.log(data);
-
-    var users = data.users;
-
-    users.forEach(function(user, index) {
-        generateFish(user);
-    });
 }
 
 User.prototype.generateColor = function(data) {
@@ -48,23 +25,10 @@ window.mobilecheck = function() {
 
 function generateFish(user) {
   if (user.mobile){
-    $('.display-view').append('<div class="fish display drag" id="id-' + user.id + '" style="background: ' + user.color + '"> <p> This is user ' + user.id + '\'s fish </p> </div>');
+    console.log('fish created');
+    $('.Fcontainer').append('<div class="fish drag circle" id="id-' + user.id + '"> <p> This is user ' + user.id + '\'s fish </p> </div>'); // <svg id="koi" viewBox="0 0 100 100"><use xlink:href="../imgs/koi.svg"></use></svg> 
+    $('#id-' + user.id).draggable();
   }
-}
-
-function fishOn(user) {
-  console.log('See Fish');
-  $(user.id).removeClass('display');
-}
-
-function fishOff(user) {
-  console.log('hide Fish');
-  $(user.id).addClass('display');
-}
-
-function generateFlower (note, user) { 
-    
-  $('.Fcontainer').append('<div class="Flower ' + note + ' drag id-' + user.id + '"> <p> ' + note + ' Flower <br>' + user.id + '</p> </div>');
 }
 
 function addUser(user) {
