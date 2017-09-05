@@ -104,6 +104,12 @@ window.onload = function () {
 var fish = $('.fish');  // box
 var Flower = $('.Flower'); //drop
     var trash = $('.trash');
+<<<<<<< HEAD
+=======
+var audio = window.audio = document.createElement('audio');
+audio.className = 'E-Note';
+audio.src = 'sounds/Zombie Long Death-SoundBible.com-554299929.mp3';
+>>>>>>> origin/master
 
 var fishButtonEl = $('#GenFish');
 var flowerButtonEl = $('#GenFlower');
@@ -234,6 +240,7 @@ $( "#genG" ).click(function() {
 //flower
 $( ".Fcontainer" ).on( "mousedown", "div", function( event ) {
     event.preventDefault();
+<<<<<<< HEAD
     $('.Flower').draggable({
       drag: function( event, ui ) {
         var fId = $(this).attr('id');
@@ -241,6 +248,10 @@ $( ".Fcontainer" ).on( "mousedown", "div", function( event ) {
         // console.log(ui.dataset.note);
       }
    });
+=======
+    //console.log( 'Flower Clicked' );
+    $('.Flower').draggable();
+>>>>>>> origin/master
 });
 
 //fish
@@ -272,6 +283,7 @@ $('.trash').droppable({
 
 //overlap code-----------------------------------------------------------------------------------------------------------------
 
+<<<<<<< HEAD
   //Guitar Samples courtesy of the Philharmonia Orchestra Sound Samples
 
   function detectcollision(){
@@ -285,6 +297,25 @@ $('.trash').droppable({
         window.audio.play();
     }
   } //detect collision
+=======
+
+  function detectcollision(){
+    var collides = $('.Flower').overlaps($('.fish'));
+      //console.log(collides);
+    if(collides.hits.length){
+
+        var note = $(collides.targets[0]).data('note');
+
+        window.audio.play();
+        //window.audio.play();
+    }else{
+      //console.log('no sound');
+    } //   http://theremin.music.uiowa.edu/MISpiano.html
+
+
+
+  }
+>>>>>>> origin/master
 
   setInterval(function(){
      detectcollision();

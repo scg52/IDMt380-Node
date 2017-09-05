@@ -31,6 +31,34 @@ function generateFish(user) {
   }
 }
 
+<<<<<<< HEAD
+=======
+function fishOn(user) {
+  console.log('See Fish');
+  $(user.id).removeClass('display');
+}
+
+function fishOff(user) {
+  console.log('hide Fish');
+  $(user.id).addClass('display');
+}
+
+function generateFlower (note, user) {
+    var $flower = $('<div />', {
+        'class': 'Flower ' + note + ' drag id-' + user.id,
+        'html': '<p> ' + note + ' Flower <br>' + user.id + '</p>'
+    }).data({
+        'note': note
+    }).draggable();
+
+    $flower.appendTo('.Fcontainer');
+
+
+  /*$('.Fcontainer').append('<div class="Flower ' + note + ' drag id-' + user.id + '"> <p> ' + note + ' Flower <br>' + user.id + '</p> </div>');
+  $('.id-' + user.id).draggable();*/
+}
+
+>>>>>>> origin/master
 function addUser(user) {
   if (user.mobile){
     users.push(user);

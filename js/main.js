@@ -16,6 +16,7 @@ var flowerButtonEl = $('#GenFlower');
 //     setInterval(detectCollision, 500);
 // }
 
+
 var drag = $('.drag');
 
            drag.on('mousedown', function(e) {
