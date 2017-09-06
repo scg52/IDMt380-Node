@@ -8,13 +8,10 @@ window.onload = function () {
 
 
  socket.on('connect', function(){
-
   socket.emit('loadAll', user);
-
  });
 
  socket.on('loadAll', function(users, flowers){
-   console.log(users);
 
    if(!user.mobile){
     users.forEach(function(user, index) {
@@ -161,17 +158,6 @@ $( "#fig8-button" ).click(function() {
     }
 });
 
-//keep fish synced on mobile and desktop
-// function fishMove(){
-//   var offsetFish = $(userId).offset();
-  
-//   socket.emit('fishMove', userId, offsetFish.left, offsetFish.top);
-// }
-
-//   setInterval(function(){
-//      fishMove();
-//   }, 2000);
-
 //button to create flowers----------------------------------------------------------------------------------------
 
 //show or hide the menu
@@ -185,48 +171,47 @@ $( "#flowerMenu" ).click(function() {
 });
 
 //generate flower by which menu item was clicked
-var newFlower;
 $( "#genA" ).click(function() {
     user.flowerCount++;
     console.log(user);
-    newFlower = generateFlower('A-Note', user);
-    socket.emit('genFlower', newFlower, user);
+    var newFlower = new Flower('A-Note', user);
+    socket.emit('genFlower', newFlower);
 });
 
 $( "#genB" ).click(function() {
     user.flowerCount++;
-    newFlower = generateFlower('B-Note', user);
-    socket.emit('genFlower', newFlower, user);
+    var newFlower = new Flower('B-Note', user);
+    socket.emit('genFlower', newFlower);
 });
 
 $( "#genC" ).click(function() {
     user.flowerCount++;
-    newFlower = generateFlower('C-Note', user);
-    socket.emit('genFlower', newFlower, user);
+    var newFlower = new Flower('C-Note', user);
+    socket.emit('genFlower', newFlower);
 });
 
 $( "#genD" ).click(function() {
     user.flowerCount++;
-    newFlower = generateFlower('D-Note', user);
-    socket.emit('genFlower', newFlower, user);
+    var newFlower = new Flower('D-Note', user);
+    socket.emit('genFlower', newFlower);
 });
 
 $( "#genE" ).click(function() {
     user.flowerCount++;
-    newFlower = generateFlower('E-Note', user);
-    socket.emit('genFlower', newFlower, user);
+    var newFlower = new Flower('E-Note', user);
+    socket.emit('genFlower', newFlower);
 });
 
 $( "#genF" ).click(function() {
     user.flowerCount++;
-    newFlower = generateFlower('F-Note', user);
-    socket.emit('genFlower', newFlower, user);
+    var newFlower = new Flower('F-Note', user);
+    socket.emit('genFlower', newFlower);
 });
 
 $( "#genG" ).click(function() {
     user.flowerCount++;
-    newFlower = generateFlower('G-Note', user);
-    socket.emit('genFlower', newFlower, user);
+    var newFlower = new Flower('G-Note', user);
+    socket.emit('genFlower', newFlower);
 });
 
 //Drag and Drop code-----------------------------------------------------------------------------------------------------------
@@ -234,15 +219,12 @@ $( "#genG" ).click(function() {
 //flower
 $( ".Fcontainer" ).on( "mousedown", "div", function( event ) {
     event.preventDefault();
-
     $('.Flower').draggable({
       drag: function( event, ui ) {
         var fId = $(this).attr('id');
         socket.emit('flowerMove', fId, ui.position.left, ui.position.top);
-        // console.log(ui.dataset.note);
       }
    });
-
 });
 
 //fish
@@ -274,7 +256,6 @@ $('.trash').droppable({
 
 //overlap code-----------------------------------------------------------------------------------------------------------------
 
-
   //Guitar Samples courtesy of the Philharmonia Orchestra Sound Samples
 
   function detectcollision(){
@@ -282,12 +263,9 @@ $('.trash').droppable({
     if(collides.hits.length){
         var aId = '#a' + $(collides.targets).attr('id');
         var audio = $(aId)[0];
-        console.log(audio);
         audio.play();
-
     }
   } //detect collision
-
 
   setInterval(function(){
      detectcollision();

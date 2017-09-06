@@ -29,7 +29,7 @@ io.sockets.on('connection', function(socket) {
     socket.emit('loadAll', users, flowers);
     users.push(user);
     socket.emit('register', user);
-    socket.broadcast.emit('register', user)
+    socket.broadcast.emit('register', user);
   });
 
   socket.on('genFlower', function(flower) {

@@ -1,11 +1,4 @@
-function Flower() {
-  this.id;
-  this.note;
-  this.user;
-  this.audio;
-}
-
-function generateFlower (note, user) {
+function Flower (note, user) {
 
   this.id = 'fId' + user.id + user.flowerCount;
   var lotusColor;
@@ -44,10 +37,10 @@ function generateFlower (note, user) {
   }).draggable();
 
 
-  //if there are any gaps in the flower count this will prevent multiple items with the same id
+  //if there are any gaps in the flower count flower will prevent multiple items with the same id
   for (var i = 1; i < user.flowerCount; i++) {
     if(!$('#fId' + user.id + i).length){
-        this.id = 'fId' + user.id + i;
+        flower.id = 'fId' + user.id + i;
 
         $flower = $('<div />', {
             'class': 'Flower ' + note + ' drag',
