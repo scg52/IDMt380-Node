@@ -55,7 +55,6 @@ function Flower (note, user) {
 
  
   $flower.appendTo('.Fcontainer');
-  
 }
 
 //create flowers based on a previously created one

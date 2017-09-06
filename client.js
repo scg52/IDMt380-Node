@@ -98,12 +98,12 @@ window.onload = function () {
 
 //------------------------------------------------------------Main------------------------------------------------------------
 
-var fish = $('.fish');  // box
-var Flower = $('.Flower'); //drop
-    var trash = $('.trash');
-
-var fishButtonEl = $('#GenFish');
-var flowerButtonEl = $('#GenFlower');
+// var fish = $('.fish');  // box
+// var $flower = $('.Flower'); //drop
+// var trash = $('.trash');
+//
+// var fishButtonEl = $('#GenFish');
+// var flowerButtonEl = $('#GenFlower');
 var userId = '#id-' + user.id;
 
 //button to toggle animation of that user's fish------------------------------------------------------------------
@@ -173,7 +173,7 @@ $( "#flowerMenu" ).click(function() {
 //generate flower by which menu item was clicked
 $( "#genA" ).click(function() {
     user.flowerCount++;
-    console.log(user);
+    console.log(Flower);
     var newFlower = new Flower('A-Note', user);
     socket.emit('genFlower', newFlower);
 });
